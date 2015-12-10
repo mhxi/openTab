@@ -1,21 +1,19 @@
-/*
- * SERVER.JS
- */
+// main: SERVER.JS //
 
 require('dotenv').load();
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-var config = require('./config')
-  , express = require('express')
-  , app = express()
-  , resources = require('./resources')
-  , path = require('path')
-  , bodyParser = require('body-parser')
-  , flash = require('connect-flash')
-  , cors = require('cors')
-  , logger = require('morgan')
-  , server = app.listen(config.port)
-  , mongoose  = require('mongoose')
+var config = require('./config'),
+    express = require('express'),
+    app = express(),
+    resources = require('./resources'),
+    path = require('path'),
+    bodyParser = require('body-parser'),
+    flash = require('connect-flash'),
+    cors = require('cors'),
+    logger = require('morgan'),
+    server = app.listen(config.port),
+    mongoose  = require('mongoose');
 
 mongoose.connect(config.db);
 

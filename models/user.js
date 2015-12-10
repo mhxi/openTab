@@ -8,20 +8,20 @@ function toLower (v) {
 }
 
 var UserSchema = new Schema({
-    created_at    : { type: Date }
-  , updated_at    : { type: Date }
-  , email         : { type: String, required: true, unique: true, trim: true, set: toLower }
-  , password      : { type: String, select: false }
-  , first         : { type: String, trim: true }
-  , last          : { type: String, trim: true }
-  , posts         : [{ type: Schema.Types.ObjectId, ref: 'Post' }]
-})
+    created_at    : { type: Date },
+    updated_at    : { type: Date },
+    email         : { type: String, required: true, unique: true, trim: true, set: toLower },
+    password      : { type: String, select: false },
+    first         : { type: String, trim: true },
+    last          : { type: String, trim: true },
+    posts         : [{ type: Schema.Types.ObjectId, ref: 'Post' }]
+});
 
 UserSchema.virtual('fullname').get(function() {
   return this.first + ' ' + this.last;
 });
 
-UserSchema.pre('save', function(next){
+UserSchema.pre('save', function (next) {
   // SET CREATED_AT AND UPDATED_AT
   now = new Date();
   this.updated_at = now;
@@ -34,17 +34,16 @@ UserSchema.pre('save', function(next){
   if (!user.isModified('password')) {
     return next();
   }
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(user.password, salt, function(err, hash) {
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(user.password, salt, function (err, hash) {
       user.password = hash;
       next();
     });
   });
 });
 
-
 UserSchema.methods.comparePassword = function(password, done) {
-  bcrypt.compare(password, this.password, function(err, isMatch) {
+  bcrypt.compare(password, this.password, function (err, isMatch) {
     done(err, isMatch);
   });
 };
