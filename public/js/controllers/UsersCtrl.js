@@ -4,19 +4,19 @@
 
 angular.module('tabApp')
 
-    .controller('ProfileCtrl', ['$scope', '$http', '$auth', 'Auth', function ($scope, $http, $auth, Auth) {
+    .controller('TabCtrl', ['$scope', '$http', '$auth', 'Auth', function ($scope, $http, $auth, Auth) {
         $http.get('/api/me').success(function (data) {
             $scope.user = data;
         });
 
-        $scope.createPost = function() {
-            $http.post('/api/posts', $scope.post)
+        $scope.createTab = function() {
+            $http.post('/api/tabs', $scope.tab)
             .success(function (response) {
-                $scope.user.posts.unshift(response);
-                $scope.post = {};
+                $scope.user.tabs.unshift(response);
+                $scope.tab = {};
             })
             .error(function (response) {
-                console.log(response) //CHECK
+                console.log(response); //CHECK
             });
         };
     }]);

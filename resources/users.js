@@ -12,7 +12,7 @@ module.exports = function(app) {
 
     app.get('/api/me', auth.ensureAuthenticated, function (req, res) {
         User.findOne({ _id: req.userId })
-        .populate('posts')
+        .populate('tabs')
         .exec(function (err, user) {
             console.log(user); //CHECK
             res.send(user);

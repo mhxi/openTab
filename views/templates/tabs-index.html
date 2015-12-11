@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-sm-3"><br/>
+      <h4>{{user.first}} {{user.last}}</h4>
+    </div>
+
+    <div class="col-sm-9">
+      <div class="page-header">
+        <h4>Tabs</h4>
+      </div>
+      
+      <form ng-submit="createTab()">
+        <div class="form-group">
+          <label for="openFor">Open Tab For:</label>
+          <input class="form-control" type="text" ng-model="tab.openFor">
+        </div>
+        <button type="submit">Save</button>
+      </form>
+
+      <div ng-repeat="tab in user.tabs">
+        <h3>{{tab.openFor}}</h3>
+      </div>
+    </div>
+
+  </div>
+</div> 

@@ -11,9 +11,9 @@ angular.module('tabApp', ['tabApp.services', 'ngRoute', 'ngResource', 'satellize
             templateUrl: 'templates/splash'
         });
 
-        $routeProvider.when('/profile', {
-            templateUrl: 'templates/profile',
-            controller: 'ProfileCtrl'
+        $routeProvider.when('/tabs', {
+            templateUrl: 'templates/tabs-index',
+            controller: 'TabCtrl'
         });
 
         $routeProvider.otherwise({redirectTo: '/'});
