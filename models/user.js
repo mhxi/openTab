@@ -44,6 +44,21 @@ UserSchema.pre('save', function (next) {
     });
 });
 
+// UserSchema.pre('remove', function (next) {
+//     // Remove all the assignment docs that reference the removed person.
+//     this.model('Assignment').remove({ tabs: this._id }, next);
+// });
+
+// UserSchema.pre('remove', function (next){
+//     this.model('User').update(
+//         {_id: {$in: this.users}}, 
+//         {$pull: {groups: this._id}}, 
+//         {multi: true},
+//         next
+//     );
+// });
+
+
 UserSchema.methods.comparePassword = function(password, done) {
     bcrypt.compare(password, this.password, function (err, isMatch) {
         done(err, isMatch);

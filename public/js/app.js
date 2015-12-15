@@ -5,23 +5,23 @@
 // Declare app level module which depends on filters, and services
 angular.module('openTab', ['openTab.services', 'ngRoute', 'ngResource', 'satellizer'])
 
-    .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
-        
-        $routeProvider.when('/', {
-            templateUrl: 'templates/splash'
-        });
+.config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+    
+    $routeProvider.when('/', {
+        templateUrl: 'templates/splash'
+    });
 
-        $routeProvider.when('/tabs', {
-            templateUrl: 'templates/tabs-index',
-            controller: 'TabCtrl'
-        });
+    $routeProvider.when('/tabs', {
+        templateUrl: 'templates/tabs-index',
+        controller: 'TabCtrl'
+    });
 
-        $routeProvider.when('/transactions', {
-            templateUrl: 'templates/tab-show',
-            controller: 'TransactionCtrl'
-        });
+    $routeProvider.when('/transactions', {
+        templateUrl: 'templates/tab-show',
+        controller: 'TransactionCtrl'
+    });
 
-        $routeProvider.otherwise({redirectTo: '/'});
+    $routeProvider.otherwise({redirectTo: '/'});
 
-        $locationProvider.html5Mode(true);
-    }]);
+    $locationProvider.html5Mode(true);
+}]);

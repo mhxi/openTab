@@ -2,12 +2,12 @@
 
 var Transaction = require('../models/transaction.js'),
 	Tab = require('../models/tab.js'),
-	User = require('../models/user.js'),
+	// User = require('../models/user.js'),
 	auth = require('./auth');
 
 module.exports = function(app) {
-	app.post('/api/transactions', auth.ensureAuthenticated, function (req, res) {
-		User.findById(req.userId).exec(function (err, user) { //findBy Tab instead of User
+	app.post('/api/tabs/:tab_id/transactions', auth.ensureAuthenticated, function (req, res) {
+		Tab.findById(req.tabId).exec(function (err, tab) { //findBy Tab instead of User
 			var transaction = new Transaction(req.body);
 			transaction.save(function (err, transaction) {
 				tab.transactions.unshift(transaction._id);

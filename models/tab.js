@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
 var TabSchema = new Schema({
 	created_at	 : { type: Date },
     updated_at   : { type: Date },
+    
 	openFor		 : { type: String, trim: true },
 	// openFor		 : [{ type: Schema.Types.ObjectId, ref: 'User' }],
 	transactions : [Transaction]
@@ -21,6 +22,15 @@ TabSchema.pre('save', function (next) {
     }
     next();
 });
+
+// TabSchema.pre('delete', function (next){
+//     console.log(this.user);
+//     this.model('User').update(
+//         {_id: this.tabs},
+//         {$pull: {tabs: this._id}},
+//         next
+//     );
+// });
 
 var Tab = mongoose.model('Tab', TabSchema);
 
