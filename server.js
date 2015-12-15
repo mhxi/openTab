@@ -38,7 +38,7 @@ app.get('/', resources.index);
 app.get('/templates/:name', resources.templates);
 require('./resources/users')(app);
 require('./resources/tabs')(app);
-require('./resources/transactions')
+require('./resources/transactions')(app);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', resources.index);

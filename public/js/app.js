@@ -16,6 +16,11 @@ angular.module('openTab', ['openTab.services', 'ngRoute', 'ngResource', 'satelli
             controller: 'TabCtrl'
         });
 
+        $routeProvider.when('/transactions', {
+            templateUrl: 'templates/tab-show',
+            controller: 'TransactionCtrl'
+        });
+
         $routeProvider.otherwise({redirectTo: '/'});
 
         $locationProvider.html5Mode(true);

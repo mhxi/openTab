@@ -4,11 +4,12 @@
 
 angular.module('openTab')
 
+// Tabs Controller
 .controller('TabCtrl', ['$scope', '$http', '$auth', 'Auth', function ($scope, $http, $auth, Auth) {
 
     $scope.allTabs = function() {
         $http.get('/api/me').success(function (data) {
-            console.log(data)
+            console.log(data); //CHECK
             $scope.user = data;
             $scope.tabs = $scope.user.tabs;
         });
@@ -28,9 +29,11 @@ angular.module('openTab')
     };
 }])
 
+// Transactions Controller
 .controller('TransactionCtrl', ['$scope', '$http', '$auth', 'Auth', function ($scope, $http, $auth, Auth) {
     
     $http.get('/api/tabs').success(function (data) {
+        console.log(data); //CHECK
         $scope.tab = data;
     });
 

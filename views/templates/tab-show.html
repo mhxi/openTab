@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    
+    <!--     <div class="col-sm-3"><br/>
+          <h4>{{user.first}} {{user.last}}</h4>
+        </div> -->
+
+        <div class="col-sm-9">
+          <div class="page-header">
+            <h4>Transactions</h4>
+          </div>
+          
+          <!-- Form to Create New Transaction -->
+          <form ng-submit="createTransaction()">
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <input class="form-control" type="text" ng-model="transaction.description">
+              <label for="amount">Amount:</label>
+              <input class="form-control" type="number" ng-model="transaction.amount">
+            </div>
+            <button type="submit">Add</button>
+          </form>
+
+          <!-- Show USER.TAB.TRANSACTIONS -->
+          <section class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6 col-md-6 col-lg-4" ng-repeat="transaction in transactions">
+                <h6>{{transaction.description}} {{transaction.amount}}</h6>
+                <button ng-click="">Delete</button>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+  </div>
+</div>

@@ -1,27 +1,31 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-sm-3"><br/>
+<!--     <div class="col-sm-3"><br/>
       <h4>{{user.first}} {{user.last}}</h4>
-    </div>
+    </div> -->
 
     <div class="col-sm-9">
       <div class="page-header">
         <h4>Tabs</h4>
       </div>
       
+      <!-- Form to Create New Tab -->
       <form ng-submit="createTab()">
         <div class="form-group">
           <label for="openFor">Open Tab For:</label>
           <input class="form-control" type="text" ng-model="tab.openFor">
         </div>
-        <button type="submit">Save</button>
+        <button type="submit">Open</button>
       </form>
 
+      <!-- Show USER.TABS as Cards -->
       <section class="container-fluid">
         <div class="row">
-          <div class="col-sm-6 col-md-6 col-lg-4" ng-repeat="tab in user.tabs" >
+          <div class="col-sm-6 col-md-6 col-lg-4" ng-repeat="tab in tabs">
             <h4 class="card">{{tab.openFor}}</h4>
+            <a href="/transactions"><button>Edit</button></a>
+            <button ng-click="">Delete</button>
           </div>
         </div>
       </section>
