@@ -10,13 +10,13 @@ function toLower (v) {
 }
 
 var UserSchema = new Schema({
-    created_at    : { type: Date },
-    updated_at    : { type: Date },
-    email         : { type: String, required: true, unique: true, trim: true, set: toLower },
-    password      : { type: String, select: false },
-    first         : { type: String, trim: true },
-    last          : { type: String, trim: true },
-    tabs         : [{ type: Schema.Types.ObjectId, ref: 'Tab' }]
+    created_at  : { type: Date },
+    updated_at  : { type: Date },
+    email       : { type: String, required: true, unique: true, trim: true, set: toLower },
+    password    : { type: String, select: false },
+    first       : { type: String, trim: true },
+    last        : { type: String, trim: true },
+    tabs        : [{ type: Schema.Types.ObjectId, ref: 'Tab' }]
 });
 
 UserSchema.virtual('fullname').get(function() {

@@ -2,7 +2,7 @@
 
 'use strict';
 
-angular.module('tabApp.services', [])
+angular.module('openTab.services', [])
 
     .factory('Auth', ['$auth', function ($auth) {
         return {

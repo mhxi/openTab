@@ -2,7 +2,7 @@
 
 'use strict';
 
-angular.module('tabApp')
+angular.module('openTab')
 
     .controller('MainCtrl', ['$scope', '$rootScope', '$location', '$auth', '$http', function ($scope, $rootScope, $location, $auth, $http) {
 

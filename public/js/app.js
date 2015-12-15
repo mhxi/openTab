@@ -3,7 +3,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-angular.module('tabApp', ['tabApp.services', 'ngRoute', 'ngResource', 'satellizer'])
+angular.module('openTab', ['openTab.services', 'ngRoute', 'ngResource', 'satellizer'])
 
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
         

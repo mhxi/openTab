@@ -1,25 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="tabApp">
+<html lang="en" ng-app="openTab">
   <head>
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <base href="/">
-    <title>MEAN Auth Skeleton</title>
+    <title>OpenTab</title>
     <meta name="description" content="A MEAN stack auth skeleton using Satellizer.">
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="//bootswatch.com/paper/bootstrap.min.css">
     <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body ng-controller="MainCtrl">
-  
+    
+    <!--  -->
     <ng-include src="'templates/navbar'"></ng-include>
     <div ng-view="ng-view"></div>
+    <!--  -->
 
+    <!-- Bootstrap and jQuery JS -->
     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <!-- Vendor Scripts -->
     <script type="text/javascript" src="/vendor/angular/angular.js"></script>
     <script type="text/javascript" src="/vendor/angular-resource/angular-resource.js"></script>
     <script type="text/javascript" src="/vendor/angular-route/angular-route.js"></script>
@@ -27,6 +33,7 @@
     <script type="text/javascript" src="/vendor/moment/moment.js"></script>
     <script type="text/javascript" src="/vendor/angular-moment/angular-moment.js"></script>
     <script type="text/javascript" src="/vendor/satellizer/satellizer.min.js"></script>
+    <!-- Local Scripts -->
     <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" src="/js/services.js"></script>
     <script type="text/javascript" src="/js/controllers/MainCtrl.js"></script>
