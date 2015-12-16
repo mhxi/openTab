@@ -4,15 +4,13 @@
 
 angular.module('openTab')
 // TABS CONTROLLER //
-.controller('TabsCtrl', ['$scope', '$http', '$auth', 'Auth', function ($scope, $http, $auth, Auth) {
+.controller('TabsCtrl', function ($scope, $location, $auth, Auth, Tab) {
 
     // GET ALL TABS
     $scope.allTabs = function() {
-        $http.get('/api/me')
-        .then(function (response) {
-            console.log(response); //CHECK
-            $scope.user = response.data;
-            $scope.tabs = $scope.user.tabs;
+        Tab.query(function (response) {
+            console.log('Successfully retrieved all tabs: ', response); //CHECK
+            $scope.tabs = response;
         });
     };
     // invoke on controller load
@@ -20,39 +18,27 @@ angular.module('openTab')
 
     // CREATE TAB
     $scope.createTab = function() {
-        $http.post('/api/tabs', $scope.tab)
-        .then(function (response) {
-            console.log(response); //CHECK
-            $scope.user.tabs.unshift(response.data);
+        $scope.tab.createdBy = $scope.currentUser;
+        var tab = new Tab($scope.tab);
+        console.log('Successfully created new tab: ', tab); //CHECK
+        tab.$save(function (data) {
+            $scope.tabs.unshift(data);
             $scope.tab = {};
         });
     };
 
     // DELETE TAB
     $scope.deleteTab = function(tab) {
-        var tabIndex = $scope.tabs.indexOf(tab);
-        $http.delete('/api/tabs' + tab._id)
-        .then(function (response) {
-            console.log(response); //CHECK
-            $scope.tabs.splice(tabIndex, 1);
-        });
+        Tab.remove({ id: tab._id });
+        console.log('Successfully deleted tab: ', tab._id); //CHECK
+        $scope.tabs.splice(tab, 1);
     };
 
-
-    // $scope.deleteTab = function(tab) {
-    //     $http.delete('/api/tabs/' + tab._id)
-    //     .then(function (response) {
-    //         var tabIndex = $scope.tabs.indexOf(tab);
-    //         $scope.tabs.splice(tabIndex, 1);
-    //     });
+    // UPDATE TAB
+    // $scope.updateTab = function(tab) {
+    //     Tab.get({ id: tab.id }, function() {
+    //         Tab.update({ id: tab.id}, tab);
+    //         // tab.editForm = false;
+    //     }); 
     // };
-
-
-
-    // $scope.deleteTab = function(tab, index) {
-    //     Tab.remove({ id: tab._id }, function(data) {
-    //         $scope.tabs.splice(index, 1);
-    //     });
-    // };
-
-}]);
+});

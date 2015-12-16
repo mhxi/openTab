@@ -4,7 +4,7 @@
 
 angular.module('openTab')
 // TRANSACTIONS CONTROLLER //
-.controller('TransactionsCtrl', ['$scope', '$http', '$auth', 'Auth', function ($scope, $http, $auth, Auth) {
+.controller('TransactionsCtrl', function ($scope, $http, $auth, Auth) {
     
     $http.get('/api/tabs')
     .success(function (data) {
@@ -22,4 +22,4 @@ angular.module('openTab')
                 console.log(response); //CHECK
             });
     };
-}]);
+});

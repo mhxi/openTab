@@ -2,68 +2,60 @@
 
 var Tab = require('../models/tab.js'),
 	// Transaction = require('../models/transaction.js'),
-	// User = require('../models/user.js'),
+	User = require('../models/user.js'),
 	auth = require('./auth');
 
 module.exports = function(app) {
 
+	// GET ALL TABS
+	app.get('/api/tabs', function (req, res) {
+		Tab.find({}, function(err, tabs) {
+			if (err) {
+				return res.status(404).send(err);
+			}
+			res.status(200).send(tabs);
+		});
+	});
+
 	// CREATE TAB
 	app.post('/api/tabs', auth.ensureAuthenticated, function (req, res) {
-		// Tab.create(req.body, function(err, tab){
-		// 	if (err) {
-		// 		return res.send(err);
-		// 	}
-		// 	console.log(tab);
-		// 	res.status(201).send(tab);
-		User.findById(req.userId).exec(function (err, user) {
-			var tab = new Tab(req.body);
-			tab.save(function (err, tab) {
-				user.tabs.unshift(tab._id);
-				user.save();
-				res.send(tab);
+		User.findOne({ email: req.body.openFor }, function (err, user) {
+			Tab.create({ createdBy: req.body.createdBy, openFor: user._id }, function (err, tab) {
+				if (err) {
+					return res.status(400).send(err);
+				}
+				res.status(201).send(tab);
 			});
 		});
 	});
 
 	// DELETE TAB by ID
 	app.delete('/api/tabs/:tab_id', function (req, res) {
-		Tab.findById(req.params.tab_id, function (err, tab) {
+		Tab.findByIdAndRemove(req.params.tab_id, function (err, tab) {
 			if (err) {
-				return res.send(err);
+				return res.status(400).send(err);
 			}
-			User.remove({ _id: {$in: tab.user} }, function (err) {
-				if (err) {
-					return res.send(err);
-				}
-				Tab.remove({ _id: tab._id}, function (err) {
-					if (err) {
-						return res.send(err);
-					}
-					res.status(200).send("Delete Success");
-				});
-			});
+			res.status(200).send('Successfully deleted Tab');
 		});
 	});
 
-
-
-	// app.delete('/api/tabs/:tab_id', function (req, res) {
-	// 	Tab.findById(req.params.tab_id, function (err, tab) {
-	// 		console.log(tab); //CHECK
-	// 		return tab.remove(function (err) {
-	// 			if (!err) {				
-	// 				User.find({ tabs: tab._id }, function(err, user) {
-	// 					console.log(user.tabs); //CHECK
-	// 					var tabIndex = user.tabs.indexOf(tab._id);
-	// 					user.tabs.splice(tabIndex, 1);
-	// 					user.save();
-	// 					console.log(user);
-	// 				});
-	// 			}
-	// 		});
+	// GET TAB by ID
+	// app.get('/api/tabs/:tab_id', function (req, res) {
+	// 	Tab.findById(req.params.tab_id, function (err, post) {
+	// 		if (err) {
+	// 			return res.status(404).send(err);
+	// 		}
+	// 		res.status(200).send(tab);
 	// 	});
 	// });
-			// 	return res.send(err);
-			// res.status(200).send('Success');
 
+	// UPDATE TAB
+	// app.put('/api/tabs/:tab_id', function (req, res) {
+	// 	Tab.findOneAndUpdate({ _id: req.params.tab_id}, req.query.tab, function (err, tab) {
+	// 		if (err) {
+	// 			return res.status(400).send(err);
+	// 		}
+	// 		res.status(200).send(tab);
+	// 	});
+	// });
 };

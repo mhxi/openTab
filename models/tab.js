@@ -4,12 +4,17 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     Transaction = require('../models/transaction.js');
 
+// GETTER
+function toLower (str) {
+    return str.toLowerCase();
+}
+
 var TabSchema = new Schema({
 	created_at	 : { type: Date },
     updated_at   : { type: Date },
 	createdBy    : [{ type: Schema.Types.ObjectId, ref: 'User' }],
-	openFor		 : [{ type: Schema.Types.ObjectId, ref: 'User' }],
-	transactions : [Transaction.schema]
+	openFor		 : [{ type: Schema.Types.ObjectId, ref: 'User', required: true, trim: true, set: toLower }],
+	transactions : [ Transaction.schema ]
 });
 
 TabSchema.pre('save', function (next) {

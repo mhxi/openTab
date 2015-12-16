@@ -14,19 +14,26 @@
       <form ng-submit="createTab()">
         <div class="form-group">
           <label for="openFor">Open Tab For:</label>
-          <input class="form-control" type="text" ng-model="tab.openFor">
+          <input class="form-control" type="text" ng-model="tab.openFor" placeholder="Enter User Email">
         </div>
         <button type="submit">Open</button>
       </form>
 
-      <!-- Show USER.TABS as Cards -->
+      <!-- Show TABS as Cards -->
       <section class="container-fluid">
         <div class="row">
+
           <div class="col-sm-6 col-md-6 col-lg-4" ng-repeat="tab in tabs">
             <h4 class="card">{{tab.openFor}}</h4>
-            <a href="/transactions"><button>Edit</button></a>
             <button ng-click="deleteTab(tab)">Delete</button>
+
+<!--             <ul ng-click="toggleTransactions()" ng-controller="TransactionsController">
+              <li ng-repeat="transaction in tab.transactions">
+                {{transaction}}
+              </li>
+            </ul> -->
           </div>
+
         </div>
       </section>
 

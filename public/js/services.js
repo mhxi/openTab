@@ -3,7 +3,7 @@
 'use strict';
 
 angular.module('openTab.services', [])
-.factory('Auth', ['$auth', function ($auth) {
+.factory('Auth', function ($auth) {
     return {
         currentUser: function() {
             var user = $auth.getPayload();
@@ -16,4 +16,25 @@ angular.module('openTab.services', [])
             return currentUser;
         }
     };
-}]);
+})
+
+.factory('Tab', function ($resource, $window) {
+    return $resource('api/tabs/:id', { id: '@_id' }, {
+        myTabs: {
+            method: 'GET',
+            url: '/api/tabs',
+            isArray: true
+        },
+        update: {
+            method: 'PUT' //issues a PUT request
+        }
+    });
+});
+
+// .factory('Transaction', function ($resource, $window) {
+//     return $resource('api/tabs/:id/transactions', { id: '@_id' }, {
+//         update: {
+//             method: 'Put' //issues a PUT request
+//         }
+//     });
+// });

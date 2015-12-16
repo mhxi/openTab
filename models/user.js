@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 // GETTER
-function toLower (v) {
-    return v.toLowerCase();
+function toLower (str) {
+    return str.toLowerCase();
 }
 
 var UserSchema = new Schema({
