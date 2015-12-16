@@ -15,10 +15,10 @@ angular.module('openTab', ['openTab.services', 'ngRoute', 'ngResource', 'satelli
         controller: 'TabsCtrl'
     });
 
-    $routeProvider.when('/transactions', {
-        templateUrl: 'templates/tab-show',
-        controller: 'TransactionsCtrl'
-    });
+    // $routeProvider.when('/tabs/:tab_id/transactions', {
+    //     templateUrl: 'templates/tabs-index',
+    //     controller: 'TransactionsCtrl'
+    // });
 
     $routeProvider.otherwise({redirectTo: '/'});
 

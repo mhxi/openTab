@@ -3,8 +3,7 @@
 'use strict';
 
 angular.module('openTab')
-// TABS CONTROLLER //
-.controller('TabsCtrl', function ($scope, $location, $auth, Auth, Tab) {
+.controller('TabsCtrl', function ($scope, $auth, Auth, Tab) {
 
     // GET ALL TABS
     $scope.allTabs = function() {

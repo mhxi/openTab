@@ -6,8 +6,8 @@ var mongoose = require('mongoose'),
 var TransactionSchema = new Schema({
 	created_at  : { type: Date },
     updated_at  : { type: Date },
-	description : { type: String, trim: true },
-	amount		: { type: Number }
+	description : { type: String, required: true, trim: true },
+	amount		: { type: Number, required: true }
 });
 
 TransactionSchema.pre('save', function (next) {

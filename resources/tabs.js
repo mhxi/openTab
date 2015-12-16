@@ -22,14 +22,14 @@ module.exports = function(app) {
 		User.findOne({ email: req.body.openFor }, function (err, user) {
 			Tab.create({ createdBy: req.body.createdBy, openFor: user._id }, function (err, tab) {
 				if (err) {
-					return res.status(400).send(err);
+					return res.status(405).send(err);
 				}
 				res.status(201).send(tab);
 			});
 		});
 	});
 
-	// DELETE TAB by ID
+	// DELETE TAB
 	app.delete('/api/tabs/:tab_id', function (req, res) {
 		Tab.findByIdAndRemove(req.params.tab_id, function (err, tab) {
 			if (err) {
@@ -39,9 +39,9 @@ module.exports = function(app) {
 		});
 	});
 
-	// GET TAB by ID
+	// GET SINGLE TAB by ID
 	// app.get('/api/tabs/:tab_id', function (req, res) {
-	// 	Tab.findById(req.params.tab_id, function (err, post) {
+	// 	Tab.findById(req.params.tab_id, function (err, tab) {
 	// 		if (err) {
 	// 			return res.status(404).send(err);
 	// 		}
@@ -53,7 +53,7 @@ module.exports = function(app) {
 	// app.put('/api/tabs/:tab_id', function (req, res) {
 	// 	Tab.findOneAndUpdate({ _id: req.params.tab_id}, req.query.tab, function (err, tab) {
 	// 		if (err) {
-	// 			return res.status(400).send(err);
+	// 			return res.status(405).send(err);
 	// 		}
 	// 		res.status(200).send(tab);
 	// 	});
