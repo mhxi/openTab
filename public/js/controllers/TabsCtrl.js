@@ -1,11 +1,10 @@
-// public/js/controllers/USERSCTRL.JS //
+// public/js/controllers/TABSCTRL.JS //
 
 'use strict';
 
 angular.module('openTab')
-
 // TABS CONTROLLER //
-.controller('TabCtrl', ['$scope', '$http', '$auth', 'Auth', function ($scope, $http, $auth, Auth) {
+.controller('TabsCtrl', ['$scope', '$http', '$auth', 'Auth', function ($scope, $http, $auth, Auth) {
 
     // GET ALL TABS
     $scope.allTabs = function() {
@@ -56,26 +55,4 @@ angular.module('openTab')
     //     });
     // };
 
-}])
-
-
-// TRANSACTIONS CONTROLLER //
-.controller('TransactionCtrl', ['$scope', '$http', '$auth', 'Auth', function ($scope, $http, $auth, Auth) {
-    
-    $http.get('/api/tabs')
-    .success(function (data) {
-        console.log(data); //CHECK
-        $scope.tab = data;
-    });
-
-    $scope.createTransaction = function() {
-        $http.post('/api/transactions', $scope.transaction)
-        .success(function (response) {
-            $scope.tab.transactions.unshift(response);
-            $scope.transaction = {};
-        })
-        .error(function (response) {
-                console.log(response); //CHECK
-            });
-    };
 }]);

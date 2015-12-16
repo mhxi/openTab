@@ -1,7 +1,8 @@
 // resources/TABS.JS //
 
 var Tab = require('../models/tab.js'),
-	User = require('../models/user.js'),
+	// Transaction = require('../models/transaction.js'),
+	// User = require('../models/user.js'),
 	auth = require('./auth');
 
 module.exports = function(app) {

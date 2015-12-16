@@ -10,13 +10,12 @@ function toLower (v) {
 }
 
 var UserSchema = new Schema({
-    created_at  : { type: Date },
-    updated_at  : { type: Date },
-    email       : { type: String, required: true, unique: true, trim: true, set: toLower },
-    password    : { type: String, select: false },
-    first       : { type: String, trim: true },
-    last        : { type: String, trim: true },
-    tabs        : [{ type: Schema.Types.ObjectId, ref: 'Tab' }]
+    created_at : { type: Date },
+    updated_at : { type: Date },
+    email      : { type: String, required: true, unique: true, trim: true, set: toLower },
+    password   : { type: String, select: false },
+    first      : { type: String, trim: true },
+    last       : { type: String, trim: true }
 });
 
 UserSchema.virtual('fullname').get(function() {
@@ -44,21 +43,6 @@ UserSchema.pre('save', function (next) {
     });
 });
 
-// UserSchema.pre('remove', function (next) {
-//     // Remove all the assignment docs that reference the removed person.
-//     this.model('Assignment').remove({ tabs: this._id }, next);
-// });
-
-// UserSchema.pre('remove', function (next){
-//     this.model('User').update(
-//         {_id: {$in: this.users}}, 
-//         {$pull: {groups: this._id}}, 
-//         {multi: true},
-//         next
-//     );
-// });
-
-
 UserSchema.methods.comparePassword = function(password, done) {
     bcrypt.compare(password, this.password, function (err, isMatch) {
         done(err, isMatch);
@@ -75,5 +59,4 @@ UserSchema.methods.comparePassword = function(password, done) {
 // });
 
 var User = mongoose.model('User', UserSchema);
-
 module.exports = User;

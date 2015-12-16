@@ -4,7 +4,6 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('openTab', ['openTab.services', 'ngRoute', 'ngResource', 'satellizer'])
-
 .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     
     $routeProvider.when('/', {
@@ -13,12 +12,12 @@ angular.module('openTab', ['openTab.services', 'ngRoute', 'ngResource', 'satelli
 
     $routeProvider.when('/tabs', {
         templateUrl: 'templates/tabs-index',
-        controller: 'TabCtrl'
+        controller: 'TabsCtrl'
     });
 
     $routeProvider.when('/transactions', {
         templateUrl: 'templates/tab-show',
-        controller: 'TransactionCtrl'
+        controller: 'TransactionsCtrl'
     });
 
     $routeProvider.otherwise({redirectTo: '/'});

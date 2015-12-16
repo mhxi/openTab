@@ -21,5 +21,4 @@ TransactionSchema.pre('save', function (next) {
 });
 
 var Transaction = mongoose.model('Transaction', TransactionSchema);
-
 module.exports = Transaction;

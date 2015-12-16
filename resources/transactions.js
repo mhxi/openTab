@@ -1,7 +1,7 @@
 // resources/TRANSACTIONS.JS //
 
 var Transaction = require('../models/transaction.js'),
-	Tab = require('../models/tab.js'),
+	// Tab = require('../models/tab.js'),
 	// User = require('../models/user.js'),
 	auth = require('./auth');
 
