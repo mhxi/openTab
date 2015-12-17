@@ -5,15 +5,8 @@
 angular.module('openTab')
 .controller('TransactionsCtrl', function ($scope, $auth, Auth, Transaction) {
     
-    // GET ALL TRANSACTIONS
-    $scope.allTransactions = function(tab) {
-        Transaction.query({ tab_id: $scope.tab._id }, function (response) {
-            console.log('Successfully retrieved all transactions: ', response); //CHECK
-            $scope.transactions = response;
-        });
-    };
-    // invoke on controller load
-    $scope.allTransactions();
+    // GET ALL TRANSACTIONS by TAB
+    $scope.transactions = Transaction.query({ tab_id: $scope.tab._id });
 
     // CREATE TRANSACTION
     $scope.createTransaction = function(tab) {
@@ -32,6 +25,16 @@ angular.module('openTab')
         $scope.tabs.splice(transaction, 1);
     };
 });
+
+    // GET ALL TRANSACTIONS
+    // $scope.allTransactions = function(tab) {
+    //     Transaction.query({ tab_id: $scope.tab._id }, function (response) {
+    //         console.log('Successfully retrieved all transactions: ', response); //CHECK
+    //         $scope.transactions = response;
+    //     });
+    // };
+    // // invoke on controller load
+    // $scope.allTransactions();
 
     // UPDATE TRANSACTION
     // $scope.updateTransaction = function(transaction) {

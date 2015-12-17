@@ -1,66 +1,146 @@
 <div class="container">
+
+<!-- Tabs For Others Column  -->
+<div class="col-xs-5">
+
   <div class="row">
-
-<!--     <div class="col-sm-3"><br/>
-      <h4>{{user.first}} {{user.last}}</h4>
-    </div> -->
-
-    <div class="col-sm-9">
-
-      <div class="page-header">
-        <h4>Tabs</h4>
+    <h4>Tabs For Others</h4>
+    <!-- TAB Form -->
+    <form id="tab-form" ng-submit="createTab()" align-center>
+      <div class="form-group">
+        <label for="openFor">Open Tab For:</label>
+        <input class="form-control" type="text" ng-model="tab.openFor" placeholder="Enter User Email">
       </div>
-      
-      <!-- Form to Create New Tab -->
-      <form ng-submit="createTab()">
-        <div class="form-group">
-          <label for="openFor">Open Tab For:</label>
-          <input class="form-control" type="text" ng-model="tab.openFor" placeholder="Enter User Email">
-        </div>
-        <button type="submit">Open</button>
-      </form>
+      <button class="btn btn-primary btn-xs" type="submit">Open</button>
+    </form>
+    <!-- Close TAB Form  -->
+  </div> <!-- .row -->
+  <br>
 
-      <!-- Show TABS as Cards -->
-      <section class="container-fluid">
-        <div class="row">
-          <div class="col-sm-6 col-md-6 col-lg-4" ng-repeat="tab in tabs">
-            <h4 class="card">{{tab.openFor.email}}</h4>
-            <button ng-click="deleteTab(tab)">Delete</button>
-            <button data-toggle="modal" data-target="#transaction-modal">Add Transaction</button>
-            <!-- Transactions Modal -->
-            <div id="transaction-modal" role="dialog" class="modal fade" ng-controller="TransactionsCtrl">
-              <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                  <div class="modal-body">
-                    <!-- Form to Create New Transaction -->
-                    <form ng-submit="createTransaction(tab)">
-                      <div class="form-group">
-                        <label for="description">Description:</label>
-                        <input type="text" ng-model="transaction.description" class="form-control"/>
-                      </div>
-                      <div class="form-group">
-                        <label for="amount">Amount:</label>
-                        <input type="number" ng-model="transaction.amount" class="form-control"/>
-                      </div>
-                      <button type="submit">Add</button>
-                    </form>
-                    <!-- End Form -->
+  <!-- View TABS as Cards -->
+  <section class="container-fluid">
+    <div class="row" ng-repeat="tab in tabs">
+      <div class="card">
+
+        <!-- TRANSACTION Modal -->
+        <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#transaction-modal">Edit</button>
+        <div id="transaction-modal" role="dialog" class="modal fade" ng-controller="TransactionsCtrl">
+          <div class="modal-dialog modal-xs">
+            <div class="modal-content">
+              <div class="modal-body">
+                <!-- TRANSACTION Form -->
+                <h4>Transaction for {{tab.openFor.email}}</h4>
+                <form ng-submit="createTransaction(tab)">
+                  <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" ng-model="transaction.description" class="form-control"/>
                   </div>
-                </div>
+                  <div class="form-group">
+                    <label for="amount">Amount:</label>
+                    <input type="number" ng-model="transaction.amount" class="form-control"/>
+                  </div>
+                  <button class="btn btn-primary btn-xs" type="submit">Add</button>
+                </form> 
+                <!-- Close TRANSACTION Form -->
               </div>
             </div>
           </div>
-          <!-- End Model -->
-        </div>
-      </section>
+        </div> 
+        <!-- Close TRANSACTION Modal -->
 
-    </div>
+        <button class="btn btn-danger btn-xs" ng-click="deleteTab(tab)">Delete</button>
+        <h5>{{tab.openFor.email}}</h5>
 
-  </div>
+        <!-- TRANSACTIONS Table -->
+        <table class="table" ng-controller="TransactionsCtrl">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="transaction in tab.transactions">
+              <td>{{transaction.created_at}}</td>
+              <td>
+                <!-- TRANSACTION.DESCRIPTION Modal -->
+                <button class="btn btn-link btn-xs" data-toggle="modal" data-target="#transaction-description">${{transaction.amount}}</button>
+                <div id="transaction-description" role="dialog" class="modal fade">
+                  <div class="modal-dialog modal-xs">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <h4>{{tab.openFor.email}} owes you ${{transaction.amount}} for {{transaction.description}} on {{transaction.created_at}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+                <!-- Close TRANSACTION.DESCRIPTION Model -->
+              </td>
+              <td>
+                <button class="btn btn-link btn-xs" ng-click="deleteTransaction(transaction)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table> 
+        <!-- Close TRANSACTIONS Table --> 
+
+      </div> <!-- .card -->
+      <br>
+    </div> <!-- .row -->
+  </section>  
 </div> 
+<!-- End Tabs For Others Column -->
 
-<!-- <ul ng-click="toggleTransactions()" ng-controller="TransactionsController">
-  <li ng-repeat="transaction in tab.transactions">
-    {{transaction}}
-  </li>
-</ul> -->
+
+
+
+<!-- My Open Tabs Column -->
+<div class="col-xs-5 col-xs-offset-2">
+  <h4>My Open Tabs</h4> 
+  <section class="container-fluid">
+    <div class="row" ng-repeat="tab in openTabs">
+      <div class="card">
+        <h5>{{tab.createdBy.email}}</h5>
+
+        <!-- TRANSACTIONS Table -->
+        <table class="table" ng-controller="TransactionsCtrl">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="transaction in tab.transactions">
+              <td>{{transaction.created_at}}</td>
+              <td>
+                <!-- TRANSACTION.DESCRIPTION Modal -->
+                <button class="btn btn-link btn-xs" data-toggle="modal" data-target="#transaction-description">${{transaction.amount}}</button>
+                <div id="transaction-description" role="dialog" class="modal fade">
+                  <div class="modal-dialog modal-xs">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <h4> You owe {{tab.createdBy.email}} ${{transaction.amount}} for {{transaction.description}} on {{transaction.created_at}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+                <!-- Close TRANSACTION.DESCRIPTION Model -->
+              </td>
+              <td>
+                <button class="btn btn-link btn-xs" ng-click="deleteTransaction(transaction)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table> 
+        <!-- Close TRANSACTIONS Table --> 
+
+      </div> <!-- .card -->
+      <br>
+    </div> <!-- .row -->
+  </section>
+</div> 
+<!-- End My Open Tabs Column -->
+</div> <!-- .container -->
