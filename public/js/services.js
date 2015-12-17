@@ -31,12 +31,13 @@ angular.module('openTab.services', [])
             isArray: true
         }
     });
-})
-// Transaction Resources
-.factory('Transaction', function ($resource, $window) {
-    return $resource('api/tabs/:tab_id/transactions/:transaction_id', { tab_id: '@_id', transaction_id: '@_id' }, {
-        update: {
-            method: 'Put' //issues a PUT request
-        }
-    });
 });
+
+// Transaction Resources
+// .factory('Transaction', function ($resource, $window) {
+//     return $resource('api/tabs/:tab_id/transactions/:transaction_id', { tab_id: '@_id', transaction_id: '@_id' }, {
+//         update: {
+//             method: 'Put' //issues a PUT request
+//         }
+//     });
+// });

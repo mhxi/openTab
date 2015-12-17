@@ -49,8 +49,18 @@ module.exports = function(app) {
 	});
 
 	// GET SINGLE TAB createdBy currentUser
-	app.get('/api/tabs/:tab_id', function (req, res) {
+	app.get('/api/tabs/:tab_id', auth.ensureAuthenticated, function (req, res) {
 		Tab.findById(req.params.tab_id).populate('openFor').exec(function (err, tab) {
+			if (err) {
+				return res.status(404).send(err);
+			}
+			res.status(200).send(tab);
+		});
+	});
+
+	// GET SINGLE TAB openFor currentUser
+	app.get('/api/tabs/:tab_id', auth.ensureAuthenticated, function (req, res) {
+		Tab.findById(req.params.tab_id).populate('createdBy').exec(function (err, tab) {
 			if (err) {
 				return res.status(404).send(err);
 			}

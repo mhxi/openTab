@@ -5,8 +5,16 @@
 angular.module('openTab')
 .controller('TabsCtrl', function ($scope, $auth, Auth, Tab) {
     
+    // $scope.allTabs = function () {
+    //     Tab.query(function (response) {
+    //         $scope.tabs = response;
+    //     });
+    // };
+    // $scope.allTabs();
+    
     // GET ALL TABS createdBy currentUser
     $scope.tabs = Tab.query();
+
     // GET ALL TABS openFor currentUser
     $scope.openTabs = Tab.openTabs();
 
