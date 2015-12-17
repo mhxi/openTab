@@ -20,7 +20,7 @@ angular.module('openTab', ['openTab.services', 'ngRoute', 'ngResource', 'satelli
     //     controller: 'TransactionsCtrl'
     // });
 
-    $routeProvider.otherwise({redirectTo: '/'});
+    $routeProvider.otherwise({ redirectTo: '/' });
 
     $locationProvider.html5Mode(true);
 });

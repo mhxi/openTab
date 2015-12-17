@@ -23,6 +23,12 @@ angular.module('openTab.services', [])
     return $resource('api/tabs/:tab_id', { tab_id: '@_id' }, {
         update: {
             method: 'PUT' //issues a PUT request
+        },
+        // custom resource
+        openTabs: {
+            url: 'api/open-tabs',
+            method: 'GET',
+            isArray: true
         }
     });
 })

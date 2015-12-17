@@ -7,7 +7,7 @@ angular.module('openTab')
     
     // GET ALL TRANSACTIONS
     $scope.allTransactions = function(tab) {
-        $scope.tab.transactions.query(function (response) {
+        Transaction.query({ tab_id: $scope.tab._id }, function (response) {
             console.log('Successfully retrieved all transactions: ', response); //CHECK
             $scope.transactions = response;
         });
@@ -19,7 +19,7 @@ angular.module('openTab')
     $scope.createTransaction = function(tab) {
         var transaction = new Transaction($scope.transaction);
         console.log('Successfully created new transaction: ', transaction); //CHECK
-        transaction.$save({ tab_id: tab._id }, function (data) {
+        transaction.$save({ tab_id: $scope.tab._id }, function (data) {
             $scope.tab.transactions.unshift(data);
             $scope.transaction = {};
         });
@@ -27,16 +27,16 @@ angular.module('openTab')
 
     // DELETE TRANSACTION
     $scope.deleteTransaction = function(transaction) {
-        Transaction.remove({ id: transaction._id });
+        Transaction.remove({ transaction_id: transaction._id });
         console.log('Successfully deleted tab: ', transaction._id); //CHECK
         $scope.tabs.splice(transaction, 1);
     };
+});
 
     // UPDATE TRANSACTION
     // $scope.updateTransaction = function(transaction) {
-    //     Transaction.get({ id: transaction.id }, function() {
-    //         Transaction.update({ id: transaction.id}, transaction);
+    //     Transaction.get({ transaction_id: transaction._id }, function() {
+    //         Transaction.update({ transaction_id: transaction._id}, transaction);
     //         // tab.editForm = false;
     //     }); 
     // };
-});

@@ -14,8 +14,8 @@ TransactionSchema.pre('save', function (next) {
     // SET CREATED_AT AND UPDATED_AT
     now = new Date();
     this.updated_at = now;
-    if ( !this.created_at ) {
-    this.created_at = now;
+    if (!this.created_at) {
+        this.created_at = now;
     }
     next();
 });

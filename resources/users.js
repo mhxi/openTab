@@ -11,9 +11,7 @@ var User = require('../models/user.js'),
 module.exports = function(app) {
 
     app.get('/api/me', auth.ensureAuthenticated, function (req, res) {
-        User.findOne({ _id: req.userId })
-        .populate('tabs')
-        .exec(function (err, user) {
+        User.findOne({ _id: req.userId }).populate('tabs').exec(function (err, user) {
             console.log(user); //CHECK
             res.send(user);
         });
@@ -51,14 +49,12 @@ module.exports = function(app) {
             if (existingUser) {
                 return res.status(409).send({ message: 'Email is already taken' });
             }
-
             var user = new User({
                 email: req.body.email,
                 password: req.body.password
             });
-
             user.save(function (err) {
-                if (err) { 
+                if (err) {
                     return res.status(400).send({err: err});
                 }
                 res.send({ token: auth.createJWT(user) });

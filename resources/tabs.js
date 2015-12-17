@@ -1,15 +1,24 @@
 // resources/TABS.JS //
 
 var Tab = require('../models/tab.js'),
-	// Transaction = require('../models/transaction.js'),
 	User = require('../models/user.js'),
 	auth = require('./auth');
 
 module.exports = function(app) {
 
-	// GET ALL TABS
-	app.get('/api/tabs', function (req, res) {
-		Tab.find({}, function(err, tabs) {
+	// GET ALL TABS createdBy currentUser
+	app.get('/api/tabs', auth.ensureAuthenticated, function (req, res) {
+		Tab.find({ createdBy: req.userId }).populate('openFor').exec(function (err, tabs) {
+			if (err) {
+				return res.status(404).send(err);
+			}
+			res.status(200).send(tabs);
+		});
+	});
+
+	// GET ALL TABS openFor currentUser
+	app.get('/api/open-tabs', auth.ensureAuthenticated, function (req, res) {
+		Tab.find({ openFor: req.userId }).populate('createdBy').exec(function (err, tabs) {
 			if (err) {
 				return res.status(404).send(err);
 			}
@@ -39,6 +48,27 @@ module.exports = function(app) {
 		});
 	});
 
+	// GET SINGLE TAB createdBy currentUser
+	app.get('/api/tabs/:tab_id', function (req, res) {
+		Tab.findById(req.params.tab_id).populate('openFor').exec(function (err, tab) {
+			if (err) {
+				return res.status(404).send(err);
+			}
+			res.status(200).send(tab);
+		});
+	});
+};
+
+	// GET ALL TABS
+	// app.get('/api/tabs', function (req, res) {
+	// 	Tab.find({}, function(err, tabs) {
+	// 		if (err) {
+	// 			return res.status(404).send(err);
+	// 		}
+	// 		res.status(200).send(tabs);
+	// 	});
+	// });
+
 	// GET SINGLE TAB by ID
 	// app.get('/api/tabs/:tab_id', function (req, res) {
 	// 	Tab.findById(req.params.tab_id, function (err, tab) {
@@ -58,4 +88,3 @@ module.exports = function(app) {
 	// 		res.status(200).send(tab);
 	// 	});
 	// });
-};

@@ -18,16 +18,13 @@ module.exports = {
 		catch (err) {
 			return res.status(401).send({ message: err.message });
 		}
-	
-		if (payload.exp <= moment().unix()) {
+		if ( payload.exp <= moment().unix() ) {
 			return res.status(401).send({ message: 'Token has expired' });
 		}
-		
 		req.userEmail = payload.email;
 		req.userId = payload.sub;
 		next();
 	},
-
 	createJWT: function(user) {
 		var payload = {
 			sub: user._id,

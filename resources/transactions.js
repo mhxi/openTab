@@ -2,7 +2,6 @@
 
 var Transaction = require('../models/transaction.js'),
 	Tab = require('../models/tab.js'),
-	// User = require('../models/user.js'),
 	auth = require('./auth');
 
 module.exports = function(app) {
@@ -48,6 +47,7 @@ module.exports = function(app) {
 			});
 		});
 	});
+};
 
 	// GET SINGLE TRANSACTION by ID
 	// app.get('/api/tabs/:tab_id/transactions/:transaction_id', function (req, res) {
@@ -72,4 +72,3 @@ module.exports = function(app) {
 	// 		});
 	// 	});
 	// });
-};
