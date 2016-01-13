@@ -39,20 +39,20 @@ angular.module('openTab')
     };
 });
 
-    // GET ALL TABS
-    // $scope.allTabs = function() {
-    //     Tab.query(function (response) {
-    //         console.log('Successfully retrieved all tabs: ', response); //CHECK
-    //         $scope.tabs = response;
-    //     });
-    // };
-    // // invoke on controller load
-    // $scope.allTabs();
+// GET ALL TABS
+// $scope.allTabs = function() {
+//     Tab.query(function (response) {
+//         console.log('Successfully retrieved all tabs: ', response); //CHECK
+//         $scope.tabs = response;
+//     });
+// };
+// // invoke on controller load
+// $scope.allTabs();
 
-    // UPDATE TAB
-    // $scope.updateTab = function(tab) {
-    //     Tab.get({ tab_id: tab.id }, function() {
-    //         Tab.update({ tab_id: tab._id}, tab);
-    //         // tab.editForm = false;
-    //     }); 
-    // };
+// UPDATE TAB
+// $scope.updateTab = function(tab) {
+//     Tab.get({ tab_id: tab.id }, function() {
+//         Tab.update({ tab_id: tab._id}, tab);
+//         // tab.editForm = false;
+//     }); 
+// };

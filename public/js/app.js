@@ -15,12 +15,13 @@ angular.module('openTab', ['openTab.services', 'ngRoute', 'ngResource', 'satelli
         controller: 'TabsCtrl'
     });
 
-    // $routeProvider.when('/tabs/:tab_id/transactions', {
-    //     templateUrl: 'templates/tabs-index',
-    //     controller: 'TransactionsCtrl'
-    // });
 
     $routeProvider.otherwise({ redirectTo: '/' });
 
     $locationProvider.html5Mode(true);
 });
+
+// $routeProvider.when('/tabs/:tab_id/transactions', {
+//     templateUrl: 'templates/tabs-index',
+//     controller: 'TransactionsCtrl'
+// });

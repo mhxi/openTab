@@ -69,32 +69,32 @@ module.exports = function(app) {
 	});
 };
 
-	// GET ALL TABS
-	// app.get('/api/tabs', function (req, res) {
-	// 	Tab.find({}, function(err, tabs) {
-	// 		if (err) {
-	// 			return res.status(404).send(err);
-	// 		}
-	// 		res.status(200).send(tabs);
-	// 	});
-	// });
+// GET ALL TABS
+// app.get('/api/tabs', function (req, res) {
+// 	Tab.find({}, function(err, tabs) {
+// 		if (err) {
+// 			return res.status(404).send(err);
+// 		}
+// 		res.status(200).send(tabs);
+// 	});
+// });
 
-	// GET SINGLE TAB by ID
-	// app.get('/api/tabs/:tab_id', function (req, res) {
-	// 	Tab.findById(req.params.tab_id, function (err, tab) {
-	// 		if (err) {
-	// 			return res.status(404).send(err);
-	// 		}
-	// 		res.status(200).send(tab);
-	// 	});
-	// });
+// GET SINGLE TAB by ID
+// app.get('/api/tabs/:tab_id', function (req, res) {
+// 	Tab.findById(req.params.tab_id, function (err, tab) {
+// 		if (err) {
+// 			return res.status(404).send(err);
+// 		}
+// 		res.status(200).send(tab);
+// 	});
+// });
 
-	// UPDATE TAB
-	// app.put('/api/tabs/:tab_id', function (req, res) {
-	// 	Tab.findOneAndUpdate({ _id: req.params.tab_id}, req.query.tab, function (err, tab) {
-	// 		if (err) {
-	// 			return res.status(405).send(err);
-	// 		}
-	// 		res.status(200).send(tab);
-	// 	});
-	// });
+// UPDATE TAB
+// app.put('/api/tabs/:tab_id', function (req, res) {
+// 	Tab.findOneAndUpdate({ _id: req.params.tab_id}, req.query.tab, function (err, tab) {
+// 		if (err) {
+// 			return res.status(405).send(err);
+// 		}
+// 		res.status(200).send(tab);
+// 	});
+// });
